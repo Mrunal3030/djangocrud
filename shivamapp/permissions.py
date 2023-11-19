@@ -13,3 +13,8 @@ class IsSuperuserOrAuthor(BasePermission):
         # Instance must have an attribute named `author`.
         return obj.author == request.user
     
+
+class IsAuthorized(permissions.BasePermission):
+    def has_permission(self, request, view):
+        # Check if the user has the required role
+        return request.user and request.user.role == "authorized"
